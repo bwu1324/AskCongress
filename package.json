@@ -1,0 +1,27 @@
+{
+  "name": "askcongress",
+  "version": "1.0.0",
+  "description": "2021 Congressional App Challenge Submittion",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint ./*.js",
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bwu1324/askCongress.git"
+  },
+  "author": "Bwu1324",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/bwu1324/askCongress/issues"
+  },
+  "homepage": "https://github.com/bwu1324/askCongress#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "eslint": "^7.32.0"
+  }
+}
