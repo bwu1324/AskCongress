@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Ask Congress - Signup</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="/global.css"/>
+	<script src="./signup.js"></script>
+</head>
+
+<body>
+	<div id="page-container">
+		<%- include('../templates/nav') -%>
+
+		<h1>Signup</h1>
+		<div>
+			<form id="signupForm">
+				<label for="username">Username:</label><br>
+				<input id="username" type="text">
+				<p id="username-tooltip" style="display: none"></p>
+				<br><br>
+				<label for="email">Email:</label><br>
+				<input id="email" type="text">
+				<p id="email-tooltip" style="display: none"></p>
+				<br><br>
+				<label for="password">Password:</label><br>
+				<input id="password" type="password">
+				<p id="password-tooltip" style="display: none"></p>
+				<br><br>
+				<input type="submit" value="Sign Up"></button>
+			</form>
+			<script src="/signupForm.js"></script>
+		</div>
+
+		<%- include('../templates/footer') -%>
+	</div>
+</body>
+
+</html>
