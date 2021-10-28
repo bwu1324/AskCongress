@@ -1,6 +1,9 @@
+const path = require('path');
 const { MongoClient } = require('mongodb');
 
-const settings = require('./settings.json');
+const server = require(path.join(__dirname, 'webServer.js'));
+
+const settings = require(path.join(__dirname, 'settings.json'));
 
 // connect to database
 async function connectDB (auth) {
@@ -13,8 +16,7 @@ async function connectDB (auth) {
 	return db;
 }
 
+// once connected, start web server
 connectDB(settings.database).then((dbClient) => {
-	// once connected, start web server
-	const server = require('./server.js');
 	server.start(dbClient, settings.secret);
 });

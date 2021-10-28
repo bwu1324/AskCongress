@@ -4,7 +4,6 @@ const emailValidator = require('deep-email-validator');
 module.exports = async (req, res, users, createCookie) => {
 	try {
 		// check for valid username, password, and emails
-
 		// username length
 		if (req.body.username.length < 5) {
 			res.send({
@@ -39,7 +38,7 @@ module.exports = async (req, res, users, createCookie) => {
 			res.send({
 				success: false,
 				error: 'email',
-				message: 'Account with this email already exists!'
+				message: 'Account with this email already exists'
 			});
 			return;
 		}
@@ -56,14 +55,14 @@ module.exports = async (req, res, users, createCookie) => {
 
 		// hash password
 		const hash = await argon2.hash(req.body.password);
-		await users.insertOne({
+		const inserted = await users.insertOne({
 			username: req.body.username,
 			email: req.body.email,
 			hash: hash
 		});
-
+		
 		// create session cookie
-		res.cookie('auth', createCookie(req.body.email));
+		res.cookie('auth', createCookie(inserted.insertedId.toString()));
 		res.send({
 			success: true
 		});

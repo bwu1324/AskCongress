@@ -1,16 +1,17 @@
-function login(event) {
+function newThread(event) {
 	// don't reload page
 	event.preventDefault();
 
 	// grab form input
-	const email = document.getElementById('email').value;
-	const password = document.getElementById('password').value;
+	const title = document.getElementById('title').value;
+	const body = document.getElementById('body').value;
+	const tags = document.getElementById('tags').value;
 
 	const tooltip = document.getElementById('tooltip');
 
 	// create new post req
 	var xhr = new XMLHttpRequest();
-	xhr.open('POST', '/login', true);
+	xhr.open('POST', '/newThread', true);
 	xhr.setRequestHeader('Content-Type', 'application/json');
 
 	xhr.onreadystatechange = function () {
@@ -24,16 +25,17 @@ function login(event) {
 				tooltip.style.display = 'block';
 			}
 			else {
-				window.location.reload();
+				// go to new thread
 			}
 		}
 	};
 
 	xhr.send(JSON.stringify({
-		email,
-		password
+		title,
+		body,
+		tags
 	}));
 }
 
-const form = document.getElementById('loginForm');
-form.addEventListener('submit', login);
+const form = document.getElementById('newThreadForm');
+form.addEventListener('submit', newThread);

@@ -16,14 +16,15 @@ function signup(event) {
 	xhr.open('POST', '/signup', true);
 	xhr.setRequestHeader('Content-Type', 'application/json');
 
-	xhr.onreadystatechange = function() {
+	xhr.onreadystatechange = function () {
 		if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
 			passwordTooltip.style.display = 'none';
 			emailTooltip.style.display = 'none';
 			usernameTooltip.style.display = 'none';
 
 			const response = JSON.parse(this.response);
-
+			
+			// if not successful, show tooltip for reason
 			if (!response.success) {
 				if (response.error == 'username') {
 					usernameTooltip.innerHTML = response.message;
@@ -38,6 +39,7 @@ function signup(event) {
 					emailTooltip.style.display = 'block';
 				}
 			}
+			// otherwise reload the page (will be redirected if logged in properly)
 			else {
 				window.location.reload();
 			}

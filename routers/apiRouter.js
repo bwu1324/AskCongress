@@ -1,12 +1,15 @@
+const path = require('path');
 const crypto = require('crypto');
 const express = require('express');
 const router = express.Router();
 
-const signup = require('./api/signup.js');
-const login = require('./api/login.js');
+const signup = require(path.join(__dirname, 'api', 'signup.js'));
+const login = require(path.join(__dirname, 'api', 'login.js'));
+const newThread = require(path.join(__dirname, 'api', 'newThread.js'));
 
 module.exports = (dbClient, secret) => {
 	const users = dbClient.collection('Users');
+	const threads = dbClient.collection('Threads');
 
 	function createCookie (email) {
 		try {
@@ -22,13 +25,18 @@ module.exports = (dbClient, secret) => {
 		}
 	}
 
-	router.post('/signup', async (req, res) => {
+	router.post('/signup', (req, res) => {
 		signup(req, res, users, createCookie);
 	});
 
-	router.post('/login', async (req, res) => {
+	router.post('/login', (req, res) => {
 		login(req, res, users, createCookie);
 	});
+
+	router.post('/newThread', (req, res) => {
+		newThread(req, res, threads);
+
+	})
 
 	return router;
 };

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Ask Congress - New Thread</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="/global.css"/>
+</head>
+
+<body>
+	<div id="page-container">
+		<%- include('../templates/nav') -%>
+
+			<h1>New Thread</h1>
+			<div>
+				<form id="newThreadForm">
+					<label for="title">Title:</label><br>
+					<input id="title" type="text">
+					<br><br>
+					<label for="body">Body:</label><br>
+					<input id="body" type="text">
+					<br><br>
+					<label for="tags">Tag a representative:</label><br>
+					<input id="tags" type="text">
+					<p id="tooltip" style="display: none"></p>
+					<br><br>
+					<input type="submit" value="Create"></button>
+					<script src="/newThread/newThreadForm.js"></script>
+				</form>
+			</div>
+
+			<%- include('../templates/footer') -%>
+	</div>
+</body>
+
+</html>
