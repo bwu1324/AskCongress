@@ -29,12 +29,16 @@ function start(dbClient, secret) {
 				const decipher = crypto.createDecipheriv('aes-256-cbc', secret, iv);
 				let decrypted = decipher.update(cookie.data, 'hex', 'utf8');
 				decrypted += decipher.final('utf8');
-				
+
 				// search for user in database
-				const user = await users.find({ _id: ObjectId(decrypted) }).toArray();
+				const user = await users.findOne({ _id: ObjectId(decrypted) }, {
+					projection: {
+						username: 1
+					}
+				});
 
 				// only authenticate is exactly 1 user is returned
-				if (user.length === 1) {
+				if (user) {
 					req.isSignedIn = true;
 					req.user = user;
 				}

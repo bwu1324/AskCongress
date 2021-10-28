@@ -25,7 +25,8 @@ function newThread(event) {
 				tooltip.style.display = 'block';
 			}
 			else {
-				// go to new thread
+				console.log(window.location.hostname);
+				window.location.href = `/thread/${response.message}`;
 			}
 		}
 	};

@@ -13,7 +13,6 @@ module.exports = async (req, res, users, createCookie) => {
 			});
 			return;
 		}
-
 		// email formatting
 		const validEmail = await emailValidator.validate({
 			email: req.body.email,
@@ -31,7 +30,6 @@ module.exports = async (req, res, users, createCookie) => {
 			});
 			return;
 		}
-
 		// if email exists already or not
 		const existingUsers = await users.find({ email: req.body.email }).toArray();
 		if (existingUsers.length !== 0) {
@@ -42,7 +40,6 @@ module.exports = async (req, res, users, createCookie) => {
 			});
 			return;
 		}
-
 		// password length
 		if (req.body.password.length < 5) {
 			res.send({
@@ -58,7 +55,9 @@ module.exports = async (req, res, users, createCookie) => {
 		const inserted = await users.insertOne({
 			username: req.body.username,
 			email: req.body.email,
-			hash: hash
+			hash: hash,
+			threads: [],
+			comments: []
 		});
 		
 		// create session cookie

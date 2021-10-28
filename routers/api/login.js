@@ -3,12 +3,17 @@ const argon2 = require('argon2');
 module.exports = async function (req, res, users, createCookie) {
 	try {
 		// check for user in database
-		const found = await users.find({ email: req.body.email }).toArray();
-		if (found.length === 1) {
+		const found = await users.findOne({ email: req.body.email }, {
+			projection: {
+				username: 1,
+				hash: 1
+			}
+		});
+		if (found) {
 			// verify password
-			if (await argon2.verify(found[0].hash, req.body.password)) {
+			if (await argon2.verify(found.hash, req.body.password)) {
 				// create and send cookie
-				res.cookie('auth', createCookie(found[0]._id.toString()));
+				res.cookie('auth', createCookie(found._id.toString()));
 				res.send({
 					success: true
 				});

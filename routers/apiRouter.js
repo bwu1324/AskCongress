@@ -34,9 +34,8 @@ module.exports = (dbClient, secret) => {
 	});
 
 	router.post('/newThread', (req, res) => {
-		newThread(req, res, threads);
-
-	})
+		newThread(req, res, users, threads);
+	});
 
 	return router;
 };

@@ -1,6 +1,66 @@
-module.exports = async function (req, res, threads) {
+module.exports = async function (req, res, users, threads) {
 	try {
+		// check that user is signed in
+		if (!req.isSignedIn) {
+			req.send({
+				success: false,
+				error: 'login',
+				message: 'An account is required to create a new thread'
+			});
+			return;
+		}
 
+		// check for non empty title and body
+		// title
+		if (req.body.title.length === 0) {
+			res.send({
+				success: false,
+				error: 'title',
+				message: 'Title cannot be empty'
+			});
+			return;
+		}
+		// body
+		if (req.body.body.length === 0) {
+			res.send({
+				success: false,
+				error: 'body',
+				message: 'Body cannot be empty'
+			});
+			return;
+		}
+
+		// create new thread
+		const createdDate = Date.now();
+		const inserted = await threads.insertOne({
+			UID: req.user._id,
+			title: req.body.title,
+			body: req.body.body,
+			comments: 0,
+			commentIds: [],
+			likes: 1,
+			likedBy: [req.user._id],
+			created: createdDate
+		});
+
+		await users.updateOne({ _id: req.user._id }, {
+			$push: {
+				threads: {
+					$each: [
+						{
+							date: createdDate,
+							id: inserted.insertedId
+						}
+					],
+					$sort: { date: -1 }
+				}
+			},
+		});
+
+		res.send({
+			success: true,
+			message: inserted.insertedId
+		});
 	} catch (error) {
 		console.log(error);
 		res.send({
@@ -8,3 +68,4 @@ module.exports = async function (req, res, threads) {
 			message: error
 		});
 	}
+};
