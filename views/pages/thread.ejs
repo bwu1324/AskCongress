@@ -14,9 +14,32 @@
 <body>
 	<div id="page-container">
 		<%- include('../templates/nav') -%>
-
-			<h1>Main - Thread</h1>
-
+			<h1>Main - Thread: <%= threadId %></h1>
+			<% if (commentId) { %>
+				<p><%= commentId %></p>
+			<% }; %>
+			<p id="thread-id" style="display: none"><%= threadId %></p>
+			<div>
+				<form id="newCommentForm">
+					<label for="comment">Comment:</label><br>
+					<input id="comment" type="text">
+					<p id="tooltip" style="display: none"></p>
+					<br><br>
+					<input type="submit" value="Post"></button>
+					<script src="/thread/newCommentForm.js"></script>
+				</form>
+			</div>
+			<div>
+				<% if (commentId) { %>
+					<button onclick="like('<%= commentId %>')">Like</button>
+					<script src="/likeButton.js"></script>
+					<button onclick="dislike('<%= commentId %>')">Dislike</button>
+					<script src="/dislikeButton.js"></script>
+				<% } else { %>
+					<button onclick="like('<%= threadId %>')">Like</button>
+					<script src="/likeButton.js"></script>
+				<% }; %>
+			</div>
 			<%- include('../templates/footer') -%>
 	</div>
 </body>

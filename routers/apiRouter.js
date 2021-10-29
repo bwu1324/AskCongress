@@ -6,10 +6,14 @@ const router = express.Router();
 const signup = require(path.join(__dirname, 'api', 'signup.js'));
 const login = require(path.join(__dirname, 'api', 'login.js'));
 const newThread = require(path.join(__dirname, 'api', 'newThread.js'));
+const newComment = require(path.join(__dirname, 'api', 'newComment.js'));
+const like = require(path.join(__dirname, 'api', 'like.js'));
+const dislike = require(path.join(__dirname, 'api', 'dislike.js'));
 
 module.exports = (dbClient, secret) => {
 	const users = dbClient.collection('Users');
 	const threads = dbClient.collection('Threads');
+	const comments = dbClient.collection('Comments');
 
 	function createCookie (email) {
 		try {
@@ -35,6 +39,18 @@ module.exports = (dbClient, secret) => {
 
 	router.post('/newThread', (req, res) => {
 		newThread(req, res, users, threads);
+	});
+
+	router.post('/newComment', (req, res) => {
+		newComment(req, res, users, threads, comments);
+	});
+
+	router.post('/like', (req, res) => {
+		like(req, res, threads, comments);
+	});
+
+	router.post('/dislike', (req, res) => {
+		dislike(req, res, comments);
 	});
 
 	return router;

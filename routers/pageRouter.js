@@ -32,8 +32,21 @@ router.get('/newThread', (req, res) => {
 });
 
 router.get('/thread/:threadId', (req, res) => {
-	console.log(req.params.threadId);
-	res.render('pages/thread', { isSignedIn: req.isSignedIn, user: req.user, threadId: req.params.threadId });
+	res.render('pages/thread', { 
+		isSignedIn: req.isSignedIn, 
+		user: req.user, 
+		threadId: req.params.threadId,
+		commentId: false
+	});
+});
+
+router.get('/thread/:threadId/:commentId', (req, res) => {
+	res.render('pages/thread', { 
+		isSignedIn: req.isSignedIn, 
+		user: req.user, 
+		threadId: req.params.threadId, 
+		commentId: req.params.commentId 
+	});
 });
 
 router.get('/members', (req, res) => {

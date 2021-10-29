@@ -2,7 +2,7 @@ module.exports = async function (req, res, users, threads) {
 	try {
 		// check that user is signed in
 		if (!req.isSignedIn) {
-			req.send({
+			res.send({
 				success: false,
 				error: 'login',
 				message: 'An account is required to create a new thread'
@@ -45,14 +45,10 @@ module.exports = async function (req, res, users, threads) {
 
 		await users.updateOne({ _id: req.user._id }, {
 			$push: {
-				threads: {
+				threadIds: {
 					$each: [
-						{
-							date: createdDate,
-							id: inserted.insertedId
-						}
-					],
-					$sort: { date: -1 }
+						inserted.insertedId
+					]
 				}
 			},
 		});

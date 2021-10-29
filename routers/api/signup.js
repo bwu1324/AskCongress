@@ -56,8 +56,8 @@ module.exports = async (req, res, users, createCookie) => {
 			username: req.body.username,
 			email: req.body.email,
 			hash: hash,
-			threads: [],
-			comments: []
+			threadIds: [],
+			commentIds: []
 		});
 		
 		// create session cookie

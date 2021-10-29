@@ -1,17 +1,15 @@
-function newThread(event) {
+function newComment(event) {
 	// don't reload page
 	event.preventDefault();
 
 	// grab form input
-	const title = document.getElementById('title').value;
-	const body = document.getElementById('body').value;
-	const tags = document.getElementById('tags').value;
-
+	const comment = document.getElementById('comment').value;
+	const threadId = document.getElementById('thread-id').innerHTML;
 	const tooltip = document.getElementById('tooltip');
 
 	// create new post req
 	var xhr = new XMLHttpRequest();
-	xhr.open('POST', '/newThread', true);
+	xhr.open('POST', '/newComment', true);
 	xhr.setRequestHeader('Content-Type', 'application/json');
 
 	xhr.onreadystatechange = function () {
@@ -25,19 +23,18 @@ function newThread(event) {
 				tooltip.innerHTML = response.message;
 				tooltip.style.display = 'block';
 			}
-			// otherwise redirect to thread page
+			// otherwise redirect to comment page
 			else {
-				window.location.href = `/thread/${response.message}`;
+				window.location.href = `/thread/${threadId}/${response.message}`;
 			}
 		}
 	};
 
 	xhr.send(JSON.stringify({
-		title,
-		body,
-		tags
+		comment,
+		threadId
 	}));
 }
 
-const form = document.getElementById('newThreadForm');
-form.addEventListener('submit', newThread);
+const form = document.getElementById('newCommentForm');
+form.addEventListener('submit', newComment);
