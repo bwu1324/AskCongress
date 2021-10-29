@@ -3,6 +3,7 @@ const crypto = require('crypto');
 const express = require('express');
 const router = express.Router();
 
+const getThread = require(path.join(__dirname, 'api', 'getThread.js'));
 const signup = require(path.join(__dirname, 'api', 'signup.js'));
 const login = require(path.join(__dirname, 'api', 'login.js'));
 const newThread = require(path.join(__dirname, 'api', 'newThread.js'));
@@ -28,6 +29,10 @@ module.exports = (dbClient, secret) => {
 			return undefined;
 		}
 	}
+
+	router.post('/getThread', (req, res) => {
+		getThread(req, res, users, threads);
+	});
 
 	router.post('/signup', (req, res) => {
 		signup(req, res, users, createCookie);

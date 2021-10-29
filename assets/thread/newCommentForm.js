@@ -32,7 +32,7 @@ function newComment(event) {
 
 	xhr.send(JSON.stringify({
 		comment,
-		threadId
+		parent: threadId
 	}));
 }
 

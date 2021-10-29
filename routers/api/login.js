@@ -22,6 +22,7 @@ module.exports = async function (req, res, users, createCookie) {
 			else {
 				res.send({
 					success: false,
+					error: 'auth',
 					message: 'Username or password is incorrect'
 				});
 			}
@@ -29,6 +30,7 @@ module.exports = async function (req, res, users, createCookie) {
 		else {
 			res.send({
 				success: false,
+				error: 'auth',
 				message: 'Username or password is incorrect'
 			});
 		}
@@ -36,6 +38,7 @@ module.exports = async function (req, res, users, createCookie) {
 		console.log(error);
 		res.send({
 			success: false,
+			error: 'unknown',
 			message: error
 		});
 	}

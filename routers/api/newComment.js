@@ -16,7 +16,7 @@ module.exports = async function (req, res, users, threads, comments) {
 		if (req.body.comment.length === 0) {
 			res.send({
 				success: false,
-				error: 'body',
+				error: 'comment',
 				message: 'Comment cannot be empty'
 			});
 			return;
@@ -36,23 +36,21 @@ module.exports = async function (req, res, users, threads, comments) {
 			created: createdDate
 		});
 
-		await threads.updateOne({ _id: ObjectId(req.body.threadId) }, {
+		await threads.updateOne({ _id: ObjectId(req.body.parent) }, {
+			$inc: {
+				comments: 1
+			},
 			$push: {
-				commentIds: {
-					$each: [
-						inserted.insertedId
-					]
-				}
+				commentIds: inserted.insertedId
 			}
 		});
 
-		await comments.updateOne({ _id: ObjectId(req.body.threadId) }, {
+		await comments.updateOne({ _id: ObjectId(req.body.id) }, {
+			$inc: {
+				comments: 1
+			},
 			$push: {
-				commentIds: {
-					$each: [
-						inserted.insertedId
-					]
-				}
+				commentIds: inserted.insertedId
 			}
 		});
 
@@ -74,6 +72,7 @@ module.exports = async function (req, res, users, threads, comments) {
 		console.log(error);
 		res.send({
 			success: false,
+			error: 'unkown',
 			message: error
 		});
 	}

@@ -55,12 +55,13 @@ module.exports = async function (req, res, users, threads) {
 
 		res.send({
 			success: true,
-			message: inserted.insertedId
+			message: inserted.insertedId.toString()
 		});
 	} catch (error) {
 		console.log(error);
 		res.send({
 			success: false,
+			error: 'unkown',
 			message: error
 		});
 	}

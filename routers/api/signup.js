@@ -69,7 +69,7 @@ module.exports = async (req, res, users, createCookie) => {
 		console.log(error);
 		res.send({
 			success: false,
-			error: 'password',
+			error: 'unknown',
 			message: error
 		});
 	}

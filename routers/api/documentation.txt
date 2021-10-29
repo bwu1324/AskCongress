@@ -1,0 +1,100 @@
+All POST:
+
+/login
+	authenticates user
+	request: 
+		{
+			email: <string>					- user's email
+			password: <password>			- user's password
+		}
+	response:
+		Set-Cookie: auth: <string>			- session cookie
+		{
+			success: <boolean>				(true) (false) - logged in successfully or not
+			error: <string>					('auth') ('unknown') (null) - type of error if there is an error, if not, then null
+			message: <string>				- info about error, if no error, then null
+		}
+
+/signup
+	creates new users
+	request: 
+		{
+			username: <string>				- user's prefered username
+			email: <string>					- user's email
+			password: <string>				- user's password
+		}
+	response:
+		Set-Cookie: auth: <string>			- session cookie
+		{
+			success: <boolean>				(true) (false) - logged in successfully or not
+			error: <string>					('username') ('email') ('password') ('unknown') (null) - type of error if there is an error, if not, then null
+			message: <string>				- info about error, if no error, then null
+		}
+
+/newThread
+	creates a new thread
+	request:
+		Cookie: auth: <string>				- session cookie
+		{
+			title: <string>					- title of new thread
+			body: <string>					- body text of new thread
+			tags: <Array[<string>]>			- array of uids of congress memebers tagged
+			type: <string>					('question') ('discussion') ('suggesting') ('other') - intened type of thread
+		}
+	response:
+		{
+			success: <boolean>				(true) (false) - created successfully or not
+			error: <stirng>					('login') ('title') ('body') ('unkown') ('null') - type of error if there is an error, if not, then null
+			message: <string>				- id of created thread if successfully, error if not
+		}
+
+/newComment
+	creates a new comment
+	request:
+		Cookie: auth: <string>				- session cookie
+		{
+			comment: <string>				- text of new comment
+			parent: <string>				- id of thread or comment being replied to
+		}
+	response:
+		{
+			success: <boolean>				(true) (false) - created successfully or not
+			error: <stirng>					('login') ('comment') ('unkown') ('null') - type of error if there is an error, if not, then null
+			message: <string>				- id of created comment if successfully, error if not
+		}
+
+/like
+	toggles like of a comment or thread
+	request:
+		Cookie: auth: <string>				- session cookie
+		{
+			comment: <string>				- text of new comment
+			id: <string>					- id of thread or comment being replied like
+		}
+	response:
+		{
+			success: <boolean>				(true) (false) - liked successfully or not
+			message: <string>				('addedLike') ('removedLike') - removed like or not
+		}
+
+/dislike
+	toggles dislike of a comment
+	request:
+		Cookie: auth: <string>				- session cookie
+		{
+			comment: <string>				- text of new comment
+			id: <string>					- id of thread or comment being disliked
+		}
+	response:
+		{
+			success: <boolean>				(true) (false) - disliked successfully or not
+			message: <string>				('addedDislike') ('removedDislike') - removed dislike or not
+		}
+
+/getThread
+/getComment
+/getUser
+/getMember
+/getTop
+
+/search

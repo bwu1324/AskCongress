@@ -123,6 +123,7 @@ module.exports = async function (req, res, threads, comments) {
 		console.log(error);
 		res.send({
 			success: false,
+			error: 'unkown',
 			message: error
 		});
 	}
