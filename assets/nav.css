@@ -1,4 +1,12 @@
+:root {
+	--nav-height: 100px;
+}
+
 #nav {
+	background-color: var(--theme-color-white);
+	position: absolute;
+	top: 0;
+	left: 0;
 	width: 100%;
-	background-color: rosybrown;
+	height: var(--nav-height);
 }

@@ -4,6 +4,7 @@ const express = require('express');
 const router = express.Router();
 
 const getThread = require(path.join(__dirname, 'api', 'getThread.js'));
+const getComments = require(path.join(__dirname, 'api', 'getComments.js'));
 const signup = require(path.join(__dirname, 'api', 'signup.js'));
 const login = require(path.join(__dirname, 'api', 'login.js'));
 const newThread = require(path.join(__dirname, 'api', 'newThread.js'));
@@ -16,13 +17,13 @@ module.exports = (dbClient, secret) => {
 	const threads = dbClient.collection('Threads');
 	const comments = dbClient.collection('Comments');
 
-	function createCookie (email) {
+	function createCookie(uid) {
 		try {
 			const iv = crypto.randomBytes(16);
 			const cipher = crypto.createCipheriv('aes-256-cbc', secret, iv);
-	
-			let encrypted = cipher.update(email, 'utf8', 'hex');
-			encrypted += cipher.final('hex');
+
+			let encrypted = cipher.update(uid, 'utf8', 'base64');
+			encrypted += cipher.final('base64');
 			return Buffer.from(JSON.stringify({ data: encrypted, iv: iv })).toString('base64');
 		} catch (error) {
 			console.log(error);
@@ -32,6 +33,10 @@ module.exports = (dbClient, secret) => {
 
 	router.post('/getThread', (req, res) => {
 		getThread(req, res, users, threads);
+	});
+
+	router.post('/getComments', (req, res) => {
+		getComments(req, res, users, comments);
 	});
 
 	router.post('/signup', (req, res) => {

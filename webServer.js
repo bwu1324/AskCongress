@@ -27,7 +27,7 @@ function start(dbClient, secret) {
 				const cookie = JSON.parse(Buffer.from(req.cookies['auth'], 'base64').toString('ascii'));
 				const iv = Buffer.from(cookie.iv);
 				const decipher = crypto.createDecipheriv('aes-256-cbc', secret, iv);
-				let decrypted = decipher.update(cookie.data, 'hex', 'utf8');
+				let decrypted = decipher.update(cookie.data, 'base64', 'utf8');
 				decrypted += decipher.final('utf8');
 
 				// search for user in database

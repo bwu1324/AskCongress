@@ -1,0 +1,12 @@
+<% if (!notFound) { %>
+	<div id="<%- threadId -%>">
+		<p><%- user.username -%></p><p><%- created -%></p>
+		<h4><%- title -%></h4>
+		<p><%- body -%></p>
+		<p>Likes: <%- likes -%>  Comments: <%- comments -%></p>
+	</div>
+<% } else { %>
+	<div>
+		<p>Thread not found</p>
+	</div>
+<% } %>

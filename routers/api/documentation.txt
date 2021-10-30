@@ -92,7 +92,38 @@ All POST:
 		}
 
 /getThread
+	gets thread information
+	request: 
+		{
+			threadId: <string>				- id of thread
+		}
+	response:
+		{
+			success: <boolean>				(true) (false) - found thread successfully or not
+			thread: <string>				- html string of thread to be displayed based on "threadBlock.ejs" template, may display error message if thread is not found
+			commentIds: <array[<string>]>	- array of ids of thread's comments
+		}
+
 /getComment
+	gets comment information
+	request:
+		{
+			commentIds: <array[<string>]>	- array of comment ids to get
+			exclude: <array[<string>]>		- array of comment ids to exclude from results
+		}
+	response:
+		{
+			success: <boolean>				(true) (false) - found thread successfully or not
+			comments: <array[				- array of objects representing comments sorted by number of likes
+				{
+					id: <string>					- comment id
+					comment: <string>				- text of comment
+					commentIds: <array[<string>]	- array of ids of comment's comments
+				}
+			]
+		}
+
+
 /getUser
 /getMember
 /getTop

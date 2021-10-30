@@ -36,7 +36,7 @@ router.get('/thread/:threadId', (req, res) => {
 		isSignedIn: req.isSignedIn, 
 		user: req.user, 
 		threadId: req.params.threadId,
-		commentId: false
+		loadComment: 'all'
 	});
 });
 
@@ -45,7 +45,7 @@ router.get('/thread/:threadId/:commentId', (req, res) => {
 		isSignedIn: req.isSignedIn, 
 		user: req.user, 
 		threadId: req.params.threadId, 
-		commentId: req.params.commentId 
+		loadComment: req.params.commentId
 	});
 });
 

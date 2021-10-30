@@ -15,10 +15,18 @@
 	<div id="page-container">
 		<%- include('../templates/nav') -%>
 			<h1>Main - Thread: <%= threadId %></h1>
-			<% if (commentId) { %>
-				<p><%= commentId %></p>
-			<% }; %>
-			<p id="thread-id" style="display: none"><%= threadId %></p>
+
+			<div id="thread">
+				<script src="/threadLoader.js"></script>
+				<script src="/commentLoader.js"></script>
+				<script type="text/javascript">
+					threadLoader('<%- threadId -%>', '<%- loadComment -%>');
+				</script>
+			</div>
+
+			<div id="comments">
+			</div>
+
 			<div>
 				<form id="newCommentForm">
 					<label for="comment">Comment:</label><br>
@@ -29,8 +37,9 @@
 					<script src="/thread/newCommentForm.js"></script>
 				</form>
 			</div>
+			<!--
 			<div>
-				<% if (commentId) { %>
+				<% if (false) { %>
 					<button onclick="like('<%= commentId %>')">Like</button>
 					<script src="/likeButton.js"></script>
 					<button onclick="dislike('<%= commentId %>')">Dislike</button>
@@ -39,7 +48,7 @@
 					<button onclick="like('<%= threadId %>')">Like</button>
 					<script src="/likeButton.js"></script>
 				<% }; %>
-			</div>
+			</div>-->
 			<%- include('../templates/footer') -%>
 	</div>
 </body>

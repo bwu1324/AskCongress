@@ -1,4 +1,6 @@
 const { ObjectId } = require('mongodb');
+const ejs = require('ejs');
+const path = require('path');
 
 module.exports = async function (req, res, users, threads) {
 	try {
@@ -16,7 +18,9 @@ module.exports = async function (req, res, users, threads) {
 				commentIds.push(thread.commentIds[i].toString());
 			}
 
-			res.send({
+			const result = {
+				notFound: false,
+				threadId: req.body.threadId,
 				user: {
 					id: user._id.toString(),
 					username: user.username
@@ -24,22 +28,28 @@ module.exports = async function (req, res, users, threads) {
 				title: thread.title,
 				body: thread.body,
 				comments: thread.comments,
-				commentIds: commentIds,
 				likes: thread.likes,
 				created: thread.created
+			};
+			const threadBlock = await ejs.renderFile(path.join(__dirname, '..', '..', 'views', 'templates', 'threadBlock.ejs'), result);
+			res.send({
+				success: true,
+				thread: threadBlock,
+				commentIds
 			});
 		} else {
+			const threadBlock = await ejs.renderFile(path.join(__dirname, '..', '..', 'views', 'templates', 'threadBlock.ejs'), { notFound: true });
 			res.send({
 				success: false,
-				message: 'Thread not found'
+				thread: threadBlock
 			});
 		}
 	} catch (error) {
 		console.log(error);
+		const threadBlock = await ejs.renderFile(path.join(__dirname, '..', '..', 'views', 'templates', 'threadBlock.ejs'), { notFound: true });
 		res.send({
 			success: false,
-			error: 'unkown',
-			message: error
+			thread: threadBlock
 		});
 	}
 };
