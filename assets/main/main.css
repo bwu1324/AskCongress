@@ -1,0 +1,30 @@
+#background-image {
+	height: 60vh;
+	background-image: url("/main/flag-background.png");
+	width: 100%;
+	background-attachment: fixed;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+#searchForm {
+	position: relative;
+	margin: 0;
+	top: 30%;
+	left: 50%;
+	-ms-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+	width: 60vw;
+}
+
+#top-threads-container {
+	margin: auto;
+	width: 60vw;
+}
+
+#top-threads-header {
+	position: relative;
+	width: 70vw;
+	margin: 50px auto;
+}

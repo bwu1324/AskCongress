@@ -40,6 +40,8 @@ module.exports = async function (req, res, users, threads) {
 			commentIds: [],
 			likes: 1,
 			likedBy: [req.user._id],
+			dislikes: 0,
+			dislikedBy: [],
 			created: createdDate
 		});
 

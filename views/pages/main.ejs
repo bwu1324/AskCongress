@@ -8,14 +8,28 @@
 	<title>Ask Congress</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="/global.css"/>
+	<link rel="stylesheet" href="/global.css" />
+	<link rel="stylesheet" href="/main/main.css" />
 </head>
 
 <body>
 	<div id="page-container">
 		<%- include('../templates/nav') -%>
 
-			<h1>Main</h1>
+			<div id="background-image">
+				<form id="searchForm">
+					<input type="text" placeholder="Search">
+				</form>
+			</div>
+			<h1 id="top-threads-header">Top Threads</h1>
+			<div id="top-threads-container">
+				<script src="/main/topThreadLoader.js"></script>
+				<script src="/global/likeButton.js"></script>
+				<script src="/global/dislikeButton.js"></script>
+				<script type="text/javascript">
+					topThreadLoader();
+				</script>
+			</div>
 
 			<%- include('../templates/footer') -%>
 	</div>

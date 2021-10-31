@@ -1,0 +1,12 @@
+:root {
+	--footer-height: 20vh;
+}
+
+#footer {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: var(--footer-height);
+	background-color: var(--theme-color-grey);
+}

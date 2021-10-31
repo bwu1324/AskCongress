@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-router.get('/', (req, res) => {
+router.get('/main', (req, res) => {
 	res.render('pages/main', { isSignedIn: req.isSignedIn, user: req.user });
 });
 
@@ -14,7 +14,7 @@ router.get('/login', (req, res) => {
 		res.render('pages/login', { isSignedIn: req.isSignedIn, user: req.user });
 	}
 	else {
-		res.redirect('/');
+		res.redirect('/main');
 	}
 });
 
@@ -23,8 +23,13 @@ router.get('/signup', (req, res) => {
 		res.render('pages/signup', { isSignedIn: req.isSignedIn, user: req.user });
 	}
 	else {
-		res.redirect('/');
+		res.redirect('/main');
 	}
+});
+
+router.get('/signout', (req, res) => {
+	res.clearCookie('auth');
+	res.redirect('/main');
 });
 
 router.get('/newThread', (req, res) => {

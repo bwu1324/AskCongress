@@ -8,47 +8,35 @@
 	<title>Ask Congress - Thread</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="/global.css"/>
+	<link rel="stylesheet" href="/global.css">
+	<link rel="stylesheet" href="/thread/thread.css">
 </head>
 
 <body>
 	<div id="page-container">
 		<%- include('../templates/nav') -%>
-			<h1>Main - Thread: <%= threadId %></h1>
+			<div id="thread-container">
+				<div id="thread">
+					<script src="/thread/threadLoader.js"></script>
+					<script src="/thread/commentLoader.js"></script>
+					<script src="/global/likeButton.js"></script>
+					<script src="/global/dislikeButton.js"></script>
+					<script type="text/javascript">
+						threadLoader('<%- threadId -%>', '<%- loadComment -%>');
+					</script>
+				</div>
 
-			<div id="thread">
-				<script src="/threadLoader.js"></script>
-				<script src="/commentLoader.js"></script>
-				<script type="text/javascript">
-					threadLoader('<%- threadId -%>', '<%- loadComment -%>');
-				</script>
-			</div>
-
-			<div id="comments">
-			</div>
-
-			<div>
 				<form id="newCommentForm">
-					<label for="comment">Comment:</label><br>
-					<input id="comment" type="text">
+					<input id="comment" type="text" placeholder="Write a new comment">
 					<p id="tooltip" style="display: none"></p>
 					<br><br>
-					<input type="submit" value="Post"></button>
+					<input type="submit" value="Post">
 					<script src="/thread/newCommentForm.js"></script>
 				</form>
 			</div>
-			<!--
+
 			<div>
-				<% if (false) { %>
-					<button onclick="like('<%= commentId %>')">Like</button>
-					<script src="/likeButton.js"></script>
-					<button onclick="dislike('<%= commentId %>')">Dislike</button>
-					<script src="/dislikeButton.js"></script>
-				<% } else { %>
-					<button onclick="like('<%= threadId %>')">Like</button>
-					<script src="/likeButton.js"></script>
-				<% }; %>
-			</div>-->
+			</div>
 			<%- include('../templates/footer') -%>
 	</div>
 </body>

@@ -1,12 +1,34 @@
 <% if (!notFound) { %>
-	<div id="<%- threadId -%>">
-		<p><%- user.username -%></p><p><%- created -%></p>
-		<h4><%- title -%></h4>
-		<p><%- body -%></p>
-		<p>Likes: <%- likes -%>  Comments: <%- comments -%></p>
+	<% var date = new Date(created) %>
+	<div class="thread-block" id="<%- threadId -%>">
+		<div class="thread-info-container">
+			<a href="/profile/<%- user.id -%>" class="thread-creator-link"><p class="thread-creator">User: <%- user.username -%></p></a>
+			<p class="thread-created">Posted: <%- date.getDate() + "/" +(date.getMonth()+1) + "/"+date.getFullYear() -%></p>
+		</div>
+		<hr>
+		<a href="/thread/<%- threadId -%>" class="thread-title-link"><h3 class="thread-title"><%- title -%></h3></a>
+		<p class="thread-body"><%- body -%></p>
+		<hr>
+		<div class="like-dislike-comment">
+			<div class="like-dislike-ratio-indicator">
+				<div class="like-indicator" style="width: <%- parseInt(100 * likes / (likes + dislikes)) -%>%"></div>
+			</div>
+			<div class="like">
+				<p class="like-count"><%- likes -%></p>
+				<button onclick="like('<%- threadId -%>')"><img class="like-icon" src="/global/like.png"></button>
+			</div>
+			<div class="dislike">
+				<p class="dislike-count"><%- dislikes -%></p>
+				<button onclick="dislike('<%- threadId -%>')"><img class="dislike-icon" src="/global/dislike.png"></button>
+			</div>
+			<div class="comment">
+				<p class="comment-count"><%- comments -%></p>
+				<img class="comment-icon" src="/global/comment.png">
+			</div>
+		</div>
 	</div>
 <% } else { %>
-	<div>
+	<div class="thread-block">
 		<p>Thread not found</p>
 	</div>
 <% } %>

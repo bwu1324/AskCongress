@@ -29,6 +29,7 @@ module.exports = async function (req, res, users, threads) {
 				body: thread.body,
 				comments: thread.comments,
 				likes: thread.likes,
+				dislikes: thread.dislikes,
 				created: thread.created
 			};
 			const threadBlock = await ejs.renderFile(path.join(__dirname, '..', '..', 'views', 'templates', 'threadBlock.ejs'), result);

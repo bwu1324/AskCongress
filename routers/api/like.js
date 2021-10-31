@@ -11,7 +11,7 @@ module.exports = async function (req, res, threads, comments) {
 			});
 			return;
 		}
-		console.log(req.body);
+
 		// try threads first
 		const threadLiked = await threads.findOne({
 			_id: ObjectId(req.body.id),
@@ -53,6 +53,20 @@ module.exports = async function (req, res, threads, comments) {
 					likedBy: req.user._id
 				}
 			});
+
+			// remove dislike if disliked
+			await threads.updateOne({ 
+				_id: ObjectId(req.body.id),
+				dislikedBy: [req.user._id]
+			}, {
+				$inc: {
+					dislikes: -1
+				},
+				$pull: {
+					dislikedBy: req.user._id
+				}
+			});
+
 			res.send({
 				success: true,
 				message: 'addedLike'

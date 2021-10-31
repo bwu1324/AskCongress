@@ -60,7 +60,7 @@ module.exports = (dbClient, secret) => {
 	});
 
 	router.post('/dislike', (req, res) => {
-		dislike(req, res, comments);
+		dislike(req, res, threads, comments);
 	});
 
 	return router;
