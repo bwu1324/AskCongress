@@ -5,8 +5,9 @@
 	margin-top: 20px;
 	border-left-style: solid;
 	padding-left: 10px;
-	border-color: black;
-	border-width: 1px;
+	border-color: var(--accent-color-grey);
+	border-width: 2px;
+	margin-bottom: 50px;
 }
 
 .comment-info-container:after {
@@ -34,10 +35,6 @@
 	margin: 0px;
 	font-size: 1em;
 	float: left;
-}
-
-.comment-comment-container {
-	margin-left: 1000px;
 }
 
 .comment-cancel {

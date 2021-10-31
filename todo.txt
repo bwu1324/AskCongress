@@ -1,4 +1,4 @@
-update like/dislike on click
+update like/dislike ratio indicator
 user profile
 tag member
 member repond page

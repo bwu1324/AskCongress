@@ -9,31 +9,41 @@
 		<a href="/thread/<%- threadId -%>" class="thread-title-link"><h3 class="thread-title"><%- title -%></h3></a>
 		<p class="thread-body"><%- body -%></p>
 		<hr>
+		<p>Tagged: 
+			<% if (tagged.length > 0) { %>
+				<% for (let i = 0; i < tagged.length - 1; i++) { %>
+					<%- tagged[i] -%>, 
+				<% } %>
+				<%- tagged[tagged.length -1] -%>
+			<% } else { %>
+				none
+			<% } %>
+		</p>
+		<hr>
 		<div class="like-dislike-comment">
 			<div class="like-dislike-ratio-indicator">
-				<div class="like-indicator" style="width: <%- parseInt(100 * likes / (likes + dislikes)) -%>%"></div>
+				<div class="like-indicator" id="<%- threadId -%>-indicator" style="width: <%- parseInt(100 * likes / (likes + dislikes)) -%>%"></div>
 			</div>
-			<div class="like">
-				<p class="like-count"><%- likes -%></p>
+			<button class="like" onclick="like('<%- threadId -%>')">
+				<p id="<%- threadId -%>-like-count" class="like-count"><%- likes -%></p>
 				<% if (liked) { %>
-					<button onclick="like('<%- threadId -%>')"><div class="like-icon-active"></div></button>
+					<div id="<%- threadId -%>-like-icon" class="like-icon-active"></div>
 				<% } else { %> 
-					<button onclick="like('<%- threadId -%>')"><div class="like-icon"></div></button>
+					<div id="<%- threadId -%>-like-icon" class="like-icon"></div>
 				<% } %>
-			</div>
-			<div class="dislike">
-				<p class="dislike-count"><%- dislikes -%></p>
+			</button>
+			<button class="dislike" onclick="dislike('<%- threadId -%>')">
+				<p id="<%- threadId -%>-dislike-count" class="dislike-count"><%- dislikes -%></p>
 				<% if (disliked) { %>
-					<button onclick="dislike('<%- threadId -%>')"><div class="dislike-icon-active"></div></button>
+					<div id="<%- threadId -%>-dislike-icon" class="dislike-icon-active"></div>
 				<% } else { %> 
-					<button onclick="dislike('<%- threadId -%>')"><div class="dislike-icon"></div></button>
+					<div id="<%- threadId -%>-dislike-icon" class="dislike-icon"></div>
 				<% } %>
-				</button>
-			</div>
-			<div class="comment">
+			</button>
+			<button class="comment">
 				<p class="comment-count"><%- comments -%></p>
-				<button><div class="comment-icon"></div></button>
-			</div>
+				<div class="comment-icon"></div>
+			</button>
 		</div>
 	</div>
 <% } else { %>

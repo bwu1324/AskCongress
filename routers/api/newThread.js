@@ -42,6 +42,7 @@ module.exports = async function (req, res, users, threads) {
 			likedBy: [req.user._id],
 			dislikes: 0,
 			dislikedBy: [],
+			tagged: req.body.tagged, 
 			created: createdDate
 		});
 

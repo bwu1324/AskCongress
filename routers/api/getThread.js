@@ -18,19 +18,24 @@ module.exports = async function (req, res, users, threads) {
 				commentIds.push(thread.commentIds[i].toString());
 			}
 
-			let liked = false;
-			for (let i = 0; i < thread.likedBy.length; i++) {
-				if (thread.likedBy[i].toString() === req.user._id.toString()) {
-					liked = true;
-					break;
-				}
-			}
+			var liked = false;
+			var disliked = false;
+			if (req.isSignedIn) {
+				var foundLike = await threads.findOne({ 
+					_id: ObjectId(thread._id),
+					likedBy: req.user._id
+				});
 
-			let disliked = false;
-			for (let i = 0; i < thread.dislikedBy.length; i++) {
-				if (thread.dislikedBy[i].toString() === req.user._id.toString()) {
+				var foundDisliked = await threads.findOne({ 
+					_id: ObjectId(thread._id),
+					dislikedBy: req.user._id
+				});
+
+				if (foundLike) {
+					liked = true;
+				}
+				if (foundDisliked) {
 					disliked = true;
-					break;
 				}
 			}
 
@@ -47,6 +52,7 @@ module.exports = async function (req, res, users, threads) {
 				likes: thread.likes,
 				dislikes: thread.dislikes,
 				created: thread.created,
+				tagged: thread.tagged,
 				liked,
 				disliked
 			};

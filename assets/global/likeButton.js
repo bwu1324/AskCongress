@@ -10,10 +10,20 @@ function like(id) {
 
 			const response = JSON.parse(this.response);
 
-			// if not successful, show tooltip for reason
-			if (!response.success) {
-				// response.message = "addedLike" or "removedLike"
+			if (response.success) {
+				document.getElementById(`${id}-dislike-count`).innerHTML = parseInt(document.getElementById(`${id}-dislike-count`).innerHTML) + response.dislike;
+				document.getElementById(`${id}-dislike-icon`).className = 'dislike-icon';
+				document.getElementById(`${id}-like-count`).innerHTML = parseInt(document.getElementById(`${id}-like-count`).innerHTML) + response.like;
+				
+				if (response.like === 1) {
+					document.getElementById(`${id}-like-icon`).className = 'like-icon-active';
+				} else {
+					document.getElementById(`${id}-like-icon`).className = 'like-icon';
+				}
+
+				document.getElementById(`${id}-indicator`).style.width =  parseInt(100 * parseInt(document.getElementById(`${id}-like-count`).innerHTML) / (parseInt(document.getElementById(`${id}-like-count`).innerHTML) + parseInt(document.getElementById(`${id}-dislike-count`).innerHTML))) + '%';
 			}
+
 		}
 	};
 

@@ -9,36 +9,37 @@
 	<hr>
 	<div class="like-dislike-comment">
 		<div class="like-dislike-ratio-indicator">
-			<div class="like-indicator" style="width: <%- parseInt(100 * likes / (likes + dislikes)) -%>%"></div>
+			<div class="like-indicator" id="<%- commentId -%>-indicator" style="width: <%- parseInt(100 * likes / (likes + dislikes)) -%>%"></div>
 		</div>
-		<div class="like">
-			<p class="like-count"><%- likes -%></p>
+		<button class="like" onclick="like('<%- commentId -%>')">
+			<p id="<%- commentId -%>-like-count" class="like-count"><%- likes -%></p>
 			<% if (liked) { %>
-				<button onclick="like('<%- commentId -%>')"><div class="like-icon-active"></div></button>
+				<div id="<%- commentId -%>-like-icon" class="like-icon-active"></div>
 			<% } else { %> 
-				<button onclick="like('<%- commentId -%>')"><div class="like-icon"></div></button>
+				<div id="<%- commentId -%>-like-icon" class="like-icon"></div>
 			<% } %>
-		</div>
-		<div class="dislike">
-			<p class="dislike-count"><%- dislikes -%></p>
+		</button>
+		
+		<button class="dislike" onclick="dislike('<%- commentId -%>')">
+			<p id="<%- commentId -%>-dislike-count" class="dislike-count"><%- dislikes -%></p>
 			<% if (disliked) { %>
-				<button onclick="dislike('<%- commentId -%>')"><div class="dislike-icon-active"></div></button>
+				<div id="<%- commentId -%>-dislike-icon" class="dislike-icon-active"></div>
 			<% } else { %> 
-				<button onclick="dislike('<%- commentId -%>')"><div class="dislike-icon"></div></button>
+				<div id="<%- commentId -%>-dislike-icon" class="dislike-icon"></div>
 			<% } %>
-		</div>
+		</button>
+
 		<div class="comment">
 			<p class="comment-count"><%- comments -%></p>
-			<button><div class="comment-icon"></div></button>
+			<div class="comment-icon"></div>
 			<button class="comment-reply" onclick="showCommentForm('<%- commentId -%>')">Reply</button>
 		</div>
-
-		<div id="<%- commentId -%>-new-comment-form" style="display: none">
-			<script src="/thread/newCommentForm.js"></script>
-			<textarea class="comment-textarea" id="new-comment-<%- commentId -%>" placeholder="Write a comment"></textarea>
-			<p id="new-comment-<%- commentId -%>-tooltip" stlye="display: hidden"></p>
-			<button class="comment-submit" onclick="newComment('<%- commentId -%>')">Comment</button><button class="comment-cancel" onclick="showCommentForm()">Cancel</button>
-		</div>
 	</div>
-	<div class="comment-comment-container" id="<%- commentId -%>-comments"></div>
+
+	<div id="<%- commentId -%>-new-comment-form" style="display: none">
+		<script src="/thread/newCommentForm.js"></script>
+		<textarea class="comment-textarea" id="new-comment-<%- commentId -%>" placeholder="Write a comment"></textarea>
+		<p class="tooltip" id="new-comment-<%- commentId -%>-tooltip" style="display: none"></p>
+		<button class="comment-submit" onclick="newComment('<%- commentId -%>')">Comment</button><button class="comment-cancel" onclick="showCommentForm()">Cancel</button>
+	</div>
 </div>

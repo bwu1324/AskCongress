@@ -74,7 +74,8 @@ All POST:
 	response:
 		{
 			success: <boolean>				(true) (false) - liked successfully or not
-			message: <string>				('addedLike') ('removedLike') - removed like or not
+			like: <int>						(-1), (0), (1) - how much likes changed by
+			dislike: <int>					(-1), (0), (1) - how much dislikes changed by
 		}
 
 /dislike
@@ -88,7 +89,8 @@ All POST:
 	response:
 		{
 			success: <boolean>				(true) (false) - disliked successfully or not
-			message: <string>				('addedDislike') ('removedDislike') - removed dislike or not
+			like: <int>						(-1), (0), (1) - how much likes changed by
+			dislike: <int>					(-1), (0), (1) - how much dislikes changed by
 		}
 
 /getThread

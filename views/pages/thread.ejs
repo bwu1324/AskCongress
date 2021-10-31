@@ -31,7 +31,7 @@
 					<div id="new-thread-comment-container">
 						<script src="/thread/newCommentForm.js"></script>
 						<textarea class="comment-textarea" id="new-comment-<%- threadId -%>" placeholder="Write a comment"></textarea>
-						<p id="new-comment-<%- threadId -%>-tooltip" stlye="display: hidden"></p>
+						<p class="tooltip" id="new-comment-<%- threadId -%>-tooltip" style="display: none"></p>
 						<button class="comment-submit" onclick="newComment('<%- threadId -%>')">Comment</button>
 					</div>
 					<% if (loadComment !== 'all' && loadComment !== '') { %>

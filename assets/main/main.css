@@ -18,11 +18,13 @@
 	-ms-transform: translate(-50%, -50%);
 	transform: translate(-50%, -50%);
 	width: 60vw;
+	min-width: 450px;
 }
 
 #top-threads-container {
 	margin: auto;
 	width: 60vw;
+	min-width: 450px;
 }
 
 #top-threads-header {

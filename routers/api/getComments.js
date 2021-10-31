@@ -10,7 +10,7 @@ module.exports = async function (req, res, users, comments) {
 		for (let i = 0; i < req.body.exclude.length; i++) {
 			req.body.exclude[i] = ObjectId(req.body.exclude[i]);
 		}
-		
+
 		const found = await comments.find({
 			_id: {
 				$in: req.body.commentIds,
@@ -31,19 +31,24 @@ module.exports = async function (req, res, users, comments) {
 				}
 			});
 
-			let liked = false;
-			for (let j = 0; j < found[i].likedBy.length; j++) {
-				if (found[i].likedBy[j].toString() === req.user._id.toString()) {
-					liked = true;
-					break;
-				}
-			}
+			var liked = false;
+			var disliked = false;
+			if (req.isSignedIn) {
+				var foundLike = await comments.findOne({ 
+					_id: ObjectId(found[i]._id),
+					likedBy: req.user._id
+				});
 
-			let disliked = false;
-			for (let j = 0; j < found[i].dislikedBy.length; j++) {
-				if (found[i].dislikedBy[j].toString() === req.user._id.toString()) {
+				var foundDisliked = await comments.findOne({ 
+					_id: ObjectId(found[i]._id),
+					dislikedBy: req.user._id
+				});
+
+				if (foundLike) {
+					liked = true;
+				}
+				if (foundDisliked) {
 					disliked = true;
-					break;
 				}
 			}
 
@@ -61,7 +66,7 @@ module.exports = async function (req, res, users, comments) {
 				liked,
 				disliked
 			};
-			
+
 			let commentBlock = await ejs.renderFile(path.join(__dirname, '..', '..', 'views', 'templates', 'commentBlock.ejs'), info);
 
 			for (let j = 0; j < found[i].commentIds.length; j++) {
@@ -74,10 +79,12 @@ module.exports = async function (req, res, users, comments) {
 				commentIds: found[i].commentIds
 			});
 		}
-
+		
+		const loadMore = !(found.length < 20);
 		res.send({
 			success: true,
-			comments: foundComments
+			comments: foundComments,
+			loadMore
 		});
 	} catch (error) {
 		console.log(error);

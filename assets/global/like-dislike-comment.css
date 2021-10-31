@@ -21,9 +21,7 @@
 	background-repeat: no-repeat;
 	background-size: cover;
 }
-.like:hover .like-icon {
-	background-image: url("/global/liked.png");
-}
+
 .like-icon-active {
 	background-image: url("/global/liked.png");
 	background-position: center;
@@ -37,9 +35,7 @@
 	background-repeat: no-repeat;
 	background-size: cover;
 }
-.dislike:hover .dislike-icon {
-	background-image: url("/global/disliked.png");
-}
+
 .dislike-icon-active {
 	background-image: url("/global/disliked.png");
 	background-position: center;
@@ -55,15 +51,16 @@
 }
 
 .like-count, .dislike-count, .comment-count {
-	margin: 0px;
+	margin-right: 10px;
 	float: left;
 }
 
 .like, .dislike, .comment {
-	padding: 5px 20px;
-	margin: 10px 10px 0px 0px;
+	padding: 5px 10px;
+	margin-top: 5px;
 	float: left;
 	border-radius: 0.5em;
+	font-size: 0.75em;
 }
 
 .like:hover, .dislike:hover {

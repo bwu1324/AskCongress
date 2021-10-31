@@ -15,13 +15,12 @@ module.exports = async function (req, res, threads, comments) {
 		// try threads first
 		const threadDisliked = await threads.findOne({
 			_id: ObjectId(req.body.id),
-			dislikedBy: [req.user._id]
+			dislikedBy: req.user._id
 		}, {
 			projection: {
 				_id: 1
 			}
 		});
-		// if already liked, remove like
 		if (threadDisliked) {
 			await threads.updateOne({ _id: ObjectId(req.body.id) }, {
 				$inc: {
@@ -33,7 +32,8 @@ module.exports = async function (req, res, threads, comments) {
 			});
 			res.send({
 				success: true,
-				message: 'removedLike'
+				like: 0,
+				dislike: -1
 			});
 			return;
 		}
@@ -55,9 +55,9 @@ module.exports = async function (req, res, threads, comments) {
 			});
 
 			// remove like if liked
-			await threads.updateOne({ 
+			var removedLike = await threads.updateOne({ 
 				_id: ObjectId(req.body.id),
-				likedBy: [req.user._id]
+				likedBy: req.user._id
 			}, {
 				$inc: {
 					likes: -1
@@ -66,10 +66,17 @@ module.exports = async function (req, res, threads, comments) {
 					likedBy: req.user._id
 				}
 			});
+			if (removedLike.modifiedCount === 1) {
+				removedLike = -1;
+			}
+			else {
+				removedLike = 0;
+			}
 			
 			res.send({
 				success: true,
-				message: 'addedLike'
+				like: removedLike,
+				dislike: 1
 			});
 			return;
 		}
@@ -77,7 +84,7 @@ module.exports = async function (req, res, threads, comments) {
 		// then try comments
 		const commentDisliked = await comments.findOne({ 
 			_id: ObjectId(req.body.id),
-			dislikedBy: [ req.user._id ]
+			dislikedBy: req.user._id
 		}, {
 			projection: {
 				_id: 1
@@ -96,7 +103,8 @@ module.exports = async function (req, res, threads, comments) {
 
 			res.send({
 				success: true,
-				message: 'removedDislike'
+				like: 0,
+				dislike: -1
 			});
 			return;
 		}
@@ -117,9 +125,9 @@ module.exports = async function (req, res, threads, comments) {
 				}
 			});
 			// remove like if liked
-			await comments.updateOne({ 
+			removedLike = await comments.updateOne({ 
 				_id: ObjectId(req.body.id),
-				likedBy: [req.user._id]
+				likedBy: req.user._id
 			}, {
 				$inc: {
 					likes: -1
@@ -128,10 +136,17 @@ module.exports = async function (req, res, threads, comments) {
 					likedBy: req.user._id
 				}
 			});
-			
+			if (removedLike.modifiedCount === 1) {
+				removedLike = -1;
+			}
+			else {
+				removedLike = 0;
+			}
+
 			res.send({
 				success: true,
-				message: 'addedDislike'
+				like: removedLike,
+				dislike: 1
 			});
 			return;
 		}

@@ -16,7 +16,7 @@ function commentLoader(parentId, commentIds, depth) {
 	if (!depth) {
 		depth = 0;
 	}
-	if (depth < 5) {
+	if (depth < 10) {
 		// create new post req
 		var xhr = new XMLHttpRequest();
 		xhr.open('POST', '/getComments', true);
@@ -36,6 +36,9 @@ function commentLoader(parentId, commentIds, depth) {
 							setTimeout(() => { commentLoader(response.comments[i].commentId, response.comments[i].commentIds, depth + 1); }, 50);
 						}
 					}
+				}
+				if (response.loadMore) {
+					setTimeout(() => { commentLoader(parentId, commentIds); }, 50);
 				}
 			}
 		};

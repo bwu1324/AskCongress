@@ -1,13 +1,37 @@
-function newThread(event) {
-	// don't reload page
-	event.preventDefault();
+var tagged = [];
+// eslint-disable-next-line
+function updateTags() {
+	const selector = document.getElementById('add-tag');
+	const taggedContainer = document.getElementById('tagged-container');
 
+	if (selector.value && tagged.indexOf(selector.value) === -1) {
+		tagged.push(selector.value);
+		taggedContainer.innerHTML +=
+			`<div class="tagged" id="${selector.value}">
+				<p>${selector.value}</p>
+				<button class="remove-tag" onclick="removeTag('${selector.value}')">x</button>
+			</div>`;
+	}
+	selector.value = '';
+}
+
+// eslint-disable-next-line
+function removeTag(tag) {
+	const index = tagged.indexOf(tag);
+	if (index !== -1) {
+		tagged.splice(index, 1);
+		document.getElementById(tag).remove();
+	}
+}
+
+// eslint-disable-next-line
+function newThread() {
 	// grab form input
 	const title = document.getElementById('title').value;
 	const body = document.getElementById('body').value;
-	const tags = document.getElementById('tags').value;
 
-	const tooltip = document.getElementById('tooltip');
+	const titleTooltip = document.getElementById('title-tooltip');
+	const bodyTooltip = document.getElementById('body-tooltip');
 
 	// create new post req
 	var xhr = new XMLHttpRequest();
@@ -16,14 +40,19 @@ function newThread(event) {
 
 	xhr.onreadystatechange = function () {
 		if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-			tooltip.style.display = 'none';
+			titleTooltip.style.display = 'none';
 
 			const response = JSON.parse(this.response);
 
 			// if not successful, show tooltip for reason
 			if (!response.success) {
-				tooltip.innerHTML = response.message;
-				tooltip.style.display = 'block';
+				if (response.error === 'title') {
+					titleTooltip.innerHTML = response.message;
+					titleTooltip.style.display = 'block';
+				} else {
+					bodyTooltip.innerHTML = response.message;
+					bodyTooltip.style.display = 'block';
+				}
 			}
 			// otherwise redirect to thread page
 			else {
@@ -35,9 +64,6 @@ function newThread(event) {
 	xhr.send(JSON.stringify({
 		title,
 		body,
-		tags
+		tagged
 	}));
 }
-
-const form = document.getElementById('newThreadForm');
-form.addEventListener('submit', newThread);
