@@ -1,6 +1,5 @@
 @import "/global/footer.css";
 @import "/global/nav.css";
-@import "/global/threadBlock.css";
 
 :root {
 	--theme-color-grey: #707070;
@@ -53,6 +52,10 @@ input:focus {
 	outline: none;
 }
 
+input[type="text"] {
+	font-family: "Merriweather", "Cambria", "Times New Roman", "Times", serif;
+}
+
 h1, h2, h3, h4, h5, h6 {
 	position: relative;
 }
@@ -85,4 +88,18 @@ button {
 hr {
 	border-style: solid none none none;
 	border-width: 1px;
+	border-color: var(--accent-color-grey)
+}
+
+textarea {
+	max-width: 100%;
+	min-width: 100%;
+	font-family: "Merriweather", "Cambria", "Times New Roman", "Times", serif;
+	font-size: 1em;
+	padding: 10px;
+}
+
+p {
+	padding: 0px;
+	margin: 0px;
 }

@@ -1,0 +1,83 @@
+.like-dislike-comment {
+	width: 100%;
+}
+
+.like-dislike-comment:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+
+.like-icon, .dislike-icon, .comment-icon, .like-icon-active, .dislike-icon-active {
+	float: left;
+	width: 1.25em;
+	height: 1.25em;
+	padding-left: 10px;
+}
+
+.like-icon {
+	background-image: url("/global/like.png");
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+.like:hover .like-icon {
+	background-image: url("/global/liked.png");
+}
+.like-icon-active {
+	background-image: url("/global/liked.png");
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+.dislike-icon {
+	background-image: url("/global/dislike.png");
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+.dislike:hover .dislike-icon {
+	background-image: url("/global/disliked.png");
+}
+.dislike-icon-active {
+	background-image: url("/global/disliked.png");
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+.comment-icon {
+	background-image: url("/global/comment.png");
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+.like-count, .dislike-count, .comment-count {
+	margin: 0px;
+	float: left;
+}
+
+.like, .dislike, .comment {
+	padding: 5px 20px;
+	margin: 10px 10px 0px 0px;
+	float: left;
+	border-radius: 0.5em;
+}
+
+.like:hover, .dislike:hover {
+	background-color: var(--accent-color-grey);
+}
+
+.like-dislike-ratio-indicator {
+	background-color: var(--accent-color-grey);
+	height: 5px;
+	max-width: 200px;
+}
+
+.like-indicator {
+	height: 5px;
+	background-color: var(--accent-color-red);
+	height: 5px;
+}

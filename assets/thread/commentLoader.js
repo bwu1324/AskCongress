@@ -1,3 +1,15 @@
+var openForm;
+// eslint-disable-next-line
+function showCommentForm(commentId) {
+	if (openForm) {
+		openForm.style.display = 'none';
+	}
+	if (commentId) {
+		openForm = document.getElementById(`${commentId}-new-comment-form`);
+		openForm.style.display = 'block';
+	}
+}
+
 var exclude = [];
 // eslint-disable-next-line
 function commentLoader(parentId, commentIds, depth) {
@@ -21,7 +33,7 @@ function commentLoader(parentId, commentIds, depth) {
 						exclude.push(response.comments[i].commentId);
 						parent.innerHTML += response.comments[i].comment;
 						if (response.comments[i].commentIds.length > 0) {
-							commentLoader(response.comments[i].commentId, response.comments[i].commentIds, depth + 1);
+							setTimeout(() => { commentLoader(response.comments[i].commentId, response.comments[i].commentIds, depth + 1); }, 50);
 						}
 					}
 				}
@@ -31,5 +43,10 @@ function commentLoader(parentId, commentIds, depth) {
 			commentIds,
 			exclude
 		}));
+	}
+	else {
+		const parent = document.getElementById(parentId);
+		// eslint-disable-next-line
+		parent.innerHTML += `<div id="comment-continue-link-container"><a id="comment-continue-link" href="/thread/${threadId}/${parentId}">See more replies ⟶</a></div>`;
 	}
 }

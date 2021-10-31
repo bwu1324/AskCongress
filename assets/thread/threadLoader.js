@@ -1,4 +1,11 @@
 // eslint-disable-next-line
+var threadId;
+// eslint-disable-next-line
+function setThreadId(id) {
+	threadId = id;
+}
+
+// eslint-disable-next-line
 function threadLoader (threadId, loadComment) {
 	// create new post req
 	var xhr = new XMLHttpRequest();
@@ -9,15 +16,15 @@ function threadLoader (threadId, loadComment) {
 		if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
 			const response = JSON.parse(this.response);
 
-			document.getElementById('thread').innerHTML += response.thread;
+			document.getElementById('thread').innerHTML = response.thread + document.getElementById('thread').innerHTML;
 			// if sucessful, load comments if needed
 			if (response.success) {
 				if (loadComment === 'all') {
 					// eslint-disable-next-line
-					commentLoader('comments', response.commentIds);
+					commentLoader('comments-container', response.commentIds);
 				} else if (loadComment !== '') {
 					// eslint-disable-next-line
-					commentLoader('comments', [loadComment]);
+					commentLoader('comments-container', [loadComment]);
 				}
 			}
 		}

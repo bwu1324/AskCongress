@@ -1,0 +1,59 @@
+@import "/global/like-dislike-comment.css";
+
+.comment-block {
+	width: 100%;
+	margin-top: 20px;
+	border-left-style: solid;
+	padding-left: 10px;
+	border-color: black;
+	border-width: 1px;
+}
+
+.comment-info-container:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+
+.comment-creator {
+	font-size: 1em;
+	margin: 0px 50px 0px 0px;
+	color: black;
+}
+
+.comment-creator-link {
+	float: left;
+	text-decoration: none;
+}
+
+.comment-creator-link:hover {
+	text-decoration: underline;
+}
+
+.comment-created {
+	margin: 0px;
+	font-size: 1em;
+	float: left;
+}
+
+.comment-comment-container {
+	margin-left: 1000px;
+}
+
+.comment-cancel {
+	margin-left: 10px;
+	color: white;
+	font-weight: bold;
+	background-color: var(--accent-color-red);
+	border-radius: 15px;
+	height: 30px;
+	padding: 0px 10px;
+}
+
+.comment-reply {
+	float: right;
+}
+
+.comment-reply:hover {
+	text-decoration: underline;
+}

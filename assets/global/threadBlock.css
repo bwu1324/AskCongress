@@ -1,3 +1,5 @@
+@import "/global/like-dislike-comment.css";
+
 .thread-block {
 	width: 100%;
 	border-radius: 10px;
@@ -52,43 +54,4 @@
 .thread-body {
 	width: 100%;
 	font-size: 1.2em;
-}
-
-.like-dislike-comment {
-	width: 100%;
-}
-
-.like-dislike-comment:after {
-	content: "";
-	display: table;
-	clear: both;
-}
-
-.like-icon, .dislike-icon, .comment-icon {
-	float: left;
-	width: 2em;
-	padding-left: 10px;
-}
-
-.like-count, .dislike-count, .comment-count {
-	margin: 0px;
-	float: left;
-}
-
-.like, .dislike, .comment {
-	width: 100px;
-	padding: 10px 0px;
-	float: left;
-}
-
-.like-dislike-ratio-indicator {
-	background-color: var(--accent-color-grey);
-	height: 5px;
-	max-width: 200px;
-}
-
-.like-indicator {
-	height: 5px;
-	background-color: var(--accent-color-red);
-	height: 5px;
 }

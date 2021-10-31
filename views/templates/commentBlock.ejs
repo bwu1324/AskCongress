@@ -1,3 +1,44 @@
-<div id="<%- info.commentId -%>">
-	<%- JSON.stringify(info) -%>
+<% var date = new Date(created) %>
+<div class="comment-block" id="<%- commentId -%>">
+	<div class="comment-info-container">
+		<a href="/profile/<%- user.id -%>" class="comment-creator-link"><p class="comment-creator">User: <%- user.username -%></p></a>
+		<p class="comment-created">Posted: <%- (date.getMonth()+1) + "/" + date.getDate() + "/" + date.getFullYear() -%></p>
+	</div>
+	<hr>
+	<p class="comment-body"><%- text -%></p>
+	<hr>
+	<div class="like-dislike-comment">
+		<div class="like-dislike-ratio-indicator">
+			<div class="like-indicator" style="width: <%- parseInt(100 * likes / (likes + dislikes)) -%>%"></div>
+		</div>
+		<div class="like">
+			<p class="like-count"><%- likes -%></p>
+			<% if (liked) { %>
+				<button onclick="like('<%- commentId -%>')"><div class="like-icon-active"></div></button>
+			<% } else { %> 
+				<button onclick="like('<%- commentId -%>')"><div class="like-icon"></div></button>
+			<% } %>
+		</div>
+		<div class="dislike">
+			<p class="dislike-count"><%- dislikes -%></p>
+			<% if (disliked) { %>
+				<button onclick="dislike('<%- commentId -%>')"><div class="dislike-icon-active"></div></button>
+			<% } else { %> 
+				<button onclick="dislike('<%- commentId -%>')"><div class="dislike-icon"></div></button>
+			<% } %>
+		</div>
+		<div class="comment">
+			<p class="comment-count"><%- comments -%></p>
+			<button><div class="comment-icon"></div></button>
+			<button class="comment-reply" onclick="showCommentForm('<%- commentId -%>')">Reply</button>
+		</div>
+
+		<div id="<%- commentId -%>-new-comment-form" style="display: none">
+			<script src="/thread/newCommentForm.js"></script>
+			<textarea class="comment-textarea" id="new-comment-<%- commentId -%>" placeholder="Write a comment"></textarea>
+			<p id="new-comment-<%- commentId -%>-tooltip" stlye="display: hidden"></p>
+			<button class="comment-submit" onclick="newComment('<%- commentId -%>')">Comment</button><button class="comment-cancel" onclick="showCommentForm()">Cancel</button>
+		</div>
+	</div>
+	<div class="comment-comment-container" id="<%- commentId -%>-comments"></div>
 </div>

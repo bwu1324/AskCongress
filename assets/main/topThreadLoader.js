@@ -1,6 +1,6 @@
 // eslint-disable-next-line
 function topThreadLoader (threadId) {
-	threadId = '617e0be5a22518f32e6b8bde';
+	threadId = '617e36c8efe25f1b586c4677';
 	// create new post req
 	var xhr = new XMLHttpRequest();
 	xhr.open('POST', '/getThread', true);

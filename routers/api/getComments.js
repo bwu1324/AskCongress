@@ -18,16 +18,6 @@ module.exports = async function (req, res, users, comments) {
 					$in: req.body.exclude
 				}
 			}
-		}, {
-			projection: {
-				UID: 1,
-				text: 1,
-				comments: 1,
-				commentIds: 1,
-				likes: 1,
-				dislikes: 1,
-				created: 1
-			}
 		}).limit(20).sort({
 			likes: -1
 		}).toArray();
@@ -41,6 +31,22 @@ module.exports = async function (req, res, users, comments) {
 				}
 			});
 
+			let liked = false;
+			for (let j = 0; j < found[i].likedBy.length; j++) {
+				if (found[i].likedBy[j].toString() === req.user._id.toString()) {
+					liked = true;
+					break;
+				}
+			}
+
+			let disliked = false;
+			for (let j = 0; j < found[i].dislikedBy.length; j++) {
+				if (found[i].dislikedBy[j].toString() === req.user._id.toString()) {
+					disliked = true;
+					break;
+				}
+			}
+
 			let info = {
 				commentId: found[i]._id.toString(),
 				user: {
@@ -51,10 +57,12 @@ module.exports = async function (req, res, users, comments) {
 				comments: found[i].comments,
 				likes: found[i].likes,
 				dislikes: found[i].dislikes,
-				created: found[i].created
+				created: found[i].created,
+				liked,
+				disliked
 			};
 			
-			let commentBlock = await ejs.renderFile(path.join(__dirname, '..', '..', 'views', 'templates', 'commentBlock.ejs'), { info});
+			let commentBlock = await ejs.renderFile(path.join(__dirname, '..', '..', 'views', 'templates', 'commentBlock.ejs'), info);
 
 			for (let j = 0; j < found[i].commentIds.length; j++) {
 				found[i].commentIds[j] = found[i].commentIds[j].toString();

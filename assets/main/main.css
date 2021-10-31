@@ -1,3 +1,5 @@
+@import "/global/threadBlock.css";
+
 #background-image {
 	height: 60vh;
 	background-image: url("/main/flag-background.png");

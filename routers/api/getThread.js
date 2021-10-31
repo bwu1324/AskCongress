@@ -18,6 +18,22 @@ module.exports = async function (req, res, users, threads) {
 				commentIds.push(thread.commentIds[i].toString());
 			}
 
+			let liked = false;
+			for (let i = 0; i < thread.likedBy.length; i++) {
+				if (thread.likedBy[i].toString() === req.user._id.toString()) {
+					liked = true;
+					break;
+				}
+			}
+
+			let disliked = false;
+			for (let i = 0; i < thread.dislikedBy.length; i++) {
+				if (thread.dislikedBy[i].toString() === req.user._id.toString()) {
+					disliked = true;
+					break;
+				}
+			}
+
 			const result = {
 				notFound: false,
 				threadId: req.body.threadId,
@@ -30,7 +46,9 @@ module.exports = async function (req, res, users, threads) {
 				comments: thread.comments,
 				likes: thread.likes,
 				dislikes: thread.dislikes,
-				created: thread.created
+				created: thread.created,
+				liked,
+				disliked
 			};
 			const threadBlock = await ejs.renderFile(path.join(__dirname, '..', '..', 'views', 'templates', 'threadBlock.ejs'), result);
 			res.send({

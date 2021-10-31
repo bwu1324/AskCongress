@@ -22,20 +22,22 @@
 					<script src="/global/likeButton.js"></script>
 					<script src="/global/dislikeButton.js"></script>
 					<script type="text/javascript">
+						setThreadId('<%- threadId -%>')
 						threadLoader('<%- threadId -%>', '<%- loadComment -%>');
 					</script>
 				</div>
 
-				<form id="newCommentForm">
-					<input id="comment" type="text" placeholder="Write a new comment">
-					<p id="tooltip" style="display: none"></p>
-					<br><br>
-					<input type="submit" value="Post">
-					<script src="/thread/newCommentForm.js"></script>
-				</form>
-			</div>
-
-			<div>
+				<div id="comments-container">
+					<div id="new-thread-comment-container">
+						<script src="/thread/newCommentForm.js"></script>
+						<textarea class="comment-textarea" id="new-comment-<%- threadId -%>" placeholder="Write a comment"></textarea>
+						<p id="new-comment-<%- threadId -%>-tooltip" stlye="display: hidden"></p>
+						<button class="comment-submit" onclick="newComment('<%- threadId -%>')">Comment</button>
+					</div>
+					<% if (loadComment !== 'all' && loadComment !== '') { %>
+						<div id="thread-return-link-container"><a id="thread-return-link" href="/thread/<%- threadId -%>">⟵ Return to thread</a></div>
+					<% } %>
+				</div>
 			</div>
 			<%- include('../templates/footer') -%>
 	</div>

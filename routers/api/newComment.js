@@ -45,7 +45,7 @@ module.exports = async function (req, res, users, threads, comments) {
 			}
 		});
 
-		await comments.updateOne({ _id: ObjectId(req.body.id) }, {
+		await comments.updateOne({ _id: ObjectId(req.body.parent) }, {
 			$inc: {
 				comments: 1
 			},

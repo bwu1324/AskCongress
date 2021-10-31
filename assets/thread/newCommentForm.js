@@ -1,11 +1,8 @@
-function newComment(event) {
-	// don't reload page
-	event.preventDefault();
-
+// eslint-disable-next-line
+function newComment(id) {
 	// grab form input
-	const comment = document.getElementById('comment').value;
-	const threadId = document.getElementById('thread-id').innerHTML;
-	const tooltip = document.getElementById('tooltip');
+	const comment = document.getElementById(`new-comment-${id}`).value;
+	const tooltip = document.getElementById(`new-comment-${id}-tooltip`);
 
 	// create new post req
 	var xhr = new XMLHttpRequest();
@@ -25,6 +22,7 @@ function newComment(event) {
 			}
 			// otherwise redirect to comment page
 			else {
+				// eslint-disable-next-line
 				window.location.href = `/thread/${threadId}/${response.message}`;
 			}
 		}
@@ -32,9 +30,6 @@ function newComment(event) {
 
 	xhr.send(JSON.stringify({
 		comment,
-		parent: threadId
+		parent: id
 	}));
 }
-
-const form = document.getElementById('newCommentForm');
-form.addEventListener('submit', newComment);

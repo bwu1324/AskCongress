@@ -4,7 +4,7 @@
   "description": "2021 Congressional App Challenge Submittion",
   "main": "run.js",
   "scripts": {
-    "lint": "eslint ./*.js ./assets/*.js ./assets/*/*.js ./routers/*.js ./routers/api/*.js",
+    "lint": "eslint ./*.js ./assets/*/*.js ./routers/*.js ./routers/api/*.js",
     "start": "node run.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
