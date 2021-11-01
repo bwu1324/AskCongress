@@ -1,5 +1,5 @@
 :root {
-	--footer-height: 20vh;
+	--footer-height: 300px;
 }
 
 #footer {
@@ -9,4 +9,53 @@
 	width: 100%;
 	height: var(--footer-height);
 	background-color: var(--theme-color-grey);
+}
+
+#footer-container {
+	margin: 50px 100px;
+}
+
+#left {
+	float: left;
+	width: calc(50% - 100px);
+}
+
+#right {
+	float: right;
+	width: calc(50% - 100px);
+}
+
+#left h3, #right h3 {
+	min-width: 0px;
+}
+
+#footer-img {
+	max-height: 100px;
+	max-width: 100%;
+}
+
+.footer-link {
+	text-decoration: none;
+	padding: 10px;
+	color: black;
+	float: left;
+	width: 100%;
+}
+
+.footer-link:hover {
+	text-decoration: underline;
+}
+
+@media (max-width: 800px) {
+	#left {
+		width: 100%;
+	}
+
+	#right {
+		width: 100%;
+	}
+
+	:root {
+		--footer-height: 600px;
+	}
 }

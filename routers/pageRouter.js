@@ -54,10 +54,6 @@ router.get('/thread/:threadId/:commentId', (req, res) => {
 	});
 });
 
-router.get('/members', (req, res) => {
-	res.render('pages/members', { isSignedIn: req.isSignedIn, user: req.user });
-});
-
 router.get('/respond', (req, res) => {
 	res.render('pages/respond', { isSignedIn: req.isSignedIn, user: req.user });
 });

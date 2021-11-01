@@ -13,7 +13,7 @@
 #searchForm {
 	position: relative;
 	margin: 0;
-	top: 30%;
+	top: 50%;
 	left: 50%;
 	-ms-transform: translate(-50%, -50%);
 	transform: translate(-50%, -50%);
@@ -24,6 +24,17 @@
 #scroll {
 	position: relative;
 	top: calc(-1 * var(--nav-height));
+}
+
+#about-blurb {
+	min-width: 400px;
+	text-align: center;
+	margin: 20px auto;
+	width: 40vw;
+	color: white;
+	padding: 10px;
+	border-radius: 10px;
+	background-color: rgba(0, 0, 0, 0.4);
 }
 
 #top-threads-container, #search-threads-container {
