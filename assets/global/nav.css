@@ -51,3 +51,8 @@
 .nav-link:hover {
 	text-decoration: underline;
 }
+
+#signed-in-as {
+	float: right;
+	margin: 20px;
+}

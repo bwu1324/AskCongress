@@ -8,29 +8,27 @@
 	<title>Ask Congress - Signup</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="/global.css"/>
+	<link rel="stylesheet" href="/global.css">
+	<link rel="stylesheet" href="/signup/signup.css">
 </head>
 
 <body>
 	<div id="page-container">
 		<%- include('../templates/nav') -%>
 
-		<h1>Signup</h1>
-		<div>
+		<div id="signup-container">
+			<h1>Signup</h1>
 			<form id="signupForm">
-				<label for="username">Username:</label><br>
-				<input id="username" type="text">
-				<p id="username-tooltip" style="display: none"></p>
+				<input id="username" type="text" placeholder="Username">
 				<br><br>
-				<label for="email">Email:</label><br>
-				<input id="email" type="text">
-				<p id="email-tooltip" style="display: none"></p>
+				<p class="tooltip" id="username-tooltip" style="display: none"></p>
+				<input id="email" type="text"  placeholder="Email">
 				<br><br>
-				<label for="password">Password:</label><br>
-				<input id="password" type="password">
-				<p id="password-tooltip" style="display: none"></p>
+				<p class="tooltip" id="email-tooltip" style="display: none"></p>
+				<input id="password" type="password"  placeholder="Password">
 				<br><br>
-				<input type="submit" value="Sign Up"></button>
+				<p class="tooltip" id="password-tooltip" style="display: none"></p>
+				<button id="submit">Sign Up</button>
 				<script src="/signup/signupForm.js"></script>
 			</form>
 		</div>

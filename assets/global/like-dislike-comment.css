@@ -61,7 +61,10 @@
 	float: left;
 	border-radius: 0.5em;
 	font-size: 0.75em;
+	background-color: white;
+	color: black;
 }
+
 
 .like:hover, .dislike:hover {
 	background-color: var(--accent-color-grey);
