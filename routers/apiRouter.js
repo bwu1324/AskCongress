@@ -3,8 +3,11 @@ const crypto = require('crypto');
 const express = require('express');
 const router = express.Router();
 
+const search = require(path.join(__dirname, 'api', 'search.js'));
+const getTop = require(path.join(__dirname, 'api', 'getTop.js'));
 const getThread = require(path.join(__dirname, 'api', 'getThread.js'));
 const getComments = require(path.join(__dirname, 'api', 'getComments.js'));
+const getTagged = require(path.join(__dirname, 'api', 'getTagged.js'));
 const signup = require(path.join(__dirname, 'api', 'signup.js'));
 const login = require(path.join(__dirname, 'api', 'login.js'));
 const newThread = require(path.join(__dirname, 'api', 'newThread.js'));
@@ -31,12 +34,24 @@ module.exports = (dbClient, secret) => {
 		}
 	}
 
+	router.post('/search', (req, res) => {
+		search(req, res, users, threads);
+	});
+
+	router.post('/getTop', (req, res) => {
+		getTop(req, res, users, threads);
+	});
+
 	router.post('/getThread', (req, res) => {
 		getThread(req, res, users, threads);
 	});
 
 	router.post('/getComments', (req, res) => {
 		getComments(req, res, users, comments);
+	});
+
+	router.post('/getTagged', (req, res) => {
+		getTagged(req, res, users, threads);
 	});
 
 	router.post('/signup', (req, res) => {

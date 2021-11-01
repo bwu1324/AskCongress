@@ -2,13 +2,17 @@
 	<div id="logo-container">
 		<a href="/main"><img id="nav-logo" src="/logo.png" href="/"></a>
 	</div>
-	<p id="signed-in-as">Signed in as: <%- user.username -%></p>
+	<% if (isSignedIn) { %>
+		<p id="signed-in-as">Signed in as: <%- user.username -%></p>
+	<% } %>
 	<div id="nav-link-container">
+		<% if (isSignedIn && user.member) { %>
+			<div class="nav-div"><a href="/respond" class="nav-link">Respond</a></div>
+		<% } %>
 		<div class="nav-div"><a href="/newThread" class="nav-link">New Thread</a></div>
 		<div class="nav-div"><a href="/members" class="nav-link">Members</a></div>
 		<div class="nav-div"><a href="/about" class="nav-link">About</a></div>
 		<% if (isSignedIn) { %>
-			<div class="nav-div"><a href="/profile" class="nav-link">Profile</a></div>
 			<div class="nav-div"><a href="/signout" class="nav-link">Sign Out</a></div>
 		<% } else { %>
 			<div class="nav-div"><a href="/login" class="nav-link">Login</a></div>

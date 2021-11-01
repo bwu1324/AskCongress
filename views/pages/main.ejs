@@ -15,12 +15,14 @@
 <body>
 	<div id="page-container">
 		<%- include('../templates/nav') -%>
-
 			<div id="background-image">
 				<form id="searchForm">
+					<script src="/main/searchForm.js"></script>
 					<input id="searchBox" type="text" placeholder="Search">
+					<input id="search-button" type="submit" value="Search"></button>
 				</form>
 			</div>
+			<div id="scroll"></div>
 			<h1 id="top-threads-header">Top Threads</h1>
 			<div id="top-threads-container">
 				<script src="/main/topThreadLoader.js"></script>
@@ -29,6 +31,12 @@
 				<script type="text/javascript">
 					topThreadLoader();
 				</script>
+			</div>
+			<div id="search-threads-container">
+			</div>
+			<div id="load-more-button-container">
+				<button class="loadMore" id="top-thread-more" onclick="topThreadLoader()">Load More</button>
+				<button class="loadMore" id="search-thread-more" onclick="search(null, true)" style="display: none">Load More</button>
 			</div>
 
 			<%- include('../templates/footer') -%>

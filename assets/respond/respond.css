@@ -1,0 +1,35 @@
+#tagged-container {
+	width: 90vw;
+	min-width: 450px;
+	margin: 30px auto;
+	padding: 10px;
+}
+
+.comment-submit {
+	color: white;
+	font-weight: bold;
+	background-color: var(--accent-color-blue);
+	border-radius: 15px;
+	height: 30px;
+	padding: 0px 10px;
+}
+
+.comment-submit:hover {
+	filter: brightness(120%)
+}
+
+.comment-created {
+	margin: 0px;
+	font-size: 1em;
+	float: left;
+}
+
+.comment-cancel {
+	margin-left: 10px;
+	color: white;
+	font-weight: bold;
+	background-color: var(--accent-color-red);
+	border-radius: 15px;
+	height: 30px;
+	padding: 0px 10px;
+}

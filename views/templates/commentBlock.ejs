@@ -1,7 +1,7 @@
 <% var date = new Date(created) %>
 <div class="comment-block" id="<%- commentId -%>">
 	<div class="comment-info-container">
-		<a href="/profile/<%- user.id -%>" class="comment-creator-link"><p class="comment-creator">User: <%- user.username -%></p></a>
+		<p class="comment-creator">User: <%- user.username -%></p>
 		<p class="comment-created">Posted: <%- (date.getMonth()+1) + "/" + date.getDate() + "/" + date.getFullYear() -%></p>
 	</div>
 	<hr>

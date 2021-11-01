@@ -42,7 +42,7 @@ module.exports = async function (req, res, users, threads) {
 			likedBy: [req.user._id],
 			dislikes: 0,
 			dislikedBy: [],
-			tagged: req.body.tagged, 
+			tagged: req.body.tagged,
 			created: createdDate
 		});
 
@@ -55,6 +55,18 @@ module.exports = async function (req, res, users, threads) {
 				}
 			},
 		});
+
+		for (let i = 0; i < req.body.tagged.length; i++) {
+			await users.updateOne({ username: req.body.tagged[i] }, {
+				$push: {
+					tagged: {
+						$each: [
+							inserted.insertedId
+						]
+					}
+				}
+			});
+		}
 
 		res.send({
 			success: true,

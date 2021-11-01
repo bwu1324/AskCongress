@@ -65,7 +65,6 @@
 	color: black;
 }
 
-
 .like:hover, .dislike:hover {
 	background-color: var(--accent-color-grey);
 }

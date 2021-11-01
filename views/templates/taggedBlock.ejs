@@ -1,0 +1,54 @@
+<% var date = new Date(created) %>
+<div class="thread-block" id="<%- threadId -%>">
+	<div class="thread-info-container">
+		<p class="thread-creator">User: <%- user.username -%></p>
+		<p class="thread-created">Posted: <%- (date.getMonth()+1) + "/"+ date.getDate() + "/" + date.getFullYear() -%></p>
+	</div>
+	<hr>
+	<a href="/thread/<%- threadId -%>" class="thread-title-link"><h3 class="thread-title"><%- title -%></h3></a>
+	<p class="thread-body"><%- body -%></p>
+	<hr>
+	<p>Tagged: 
+		<% if (tagged.length > 0) { %>
+			<% for (let i = 0; i < tagged.length - 1; i++) { %>
+				<%- tagged[i] -%>, 
+			<% } %>
+			<%- tagged[tagged.length -1] -%>
+		<% } else { %>
+			none
+		<% } %>
+	</p>
+	<hr>
+	<div class="like-dislike-comment">
+		<div class="like-dislike-ratio-indicator">
+			<div class="like-indicator" id="<%- threadId -%>-indicator" style="width: <%- parseInt(100 * likes / (likes + dislikes)) -%>%"></div>
+		</div>
+		<button class="like" onclick="like('<%- threadId -%>')">
+			<p id="<%- threadId -%>-like-count" class="like-count"><%- likes -%></p>
+			<% if (liked) { %>
+				<div id="<%- threadId -%>-like-icon" class="like-icon-active"></div>
+			<% } else { %> 
+				<div id="<%- threadId -%>-like-icon" class="like-icon"></div>
+			<% } %>
+		</button>
+		<button class="dislike" onclick="dislike('<%- threadId -%>')">
+			<p id="<%- threadId -%>-dislike-count" class="dislike-count"><%- dislikes -%></p>
+			<% if (disliked) { %>
+				<div id="<%- threadId -%>-dislike-icon" class="dislike-icon-active"></div>
+			<% } else { %> 
+				<div id="<%- threadId -%>-dislike-icon" class="dislike-icon"></div>
+			<% } %>
+		</button>
+		<div class="comment">
+			<p class="comment-count"><%- comments -%></p>
+			<div class="comment-icon"></div>
+			<button class="comment-reply" onclick="showCommentForm('<%- threadId -%>')">Reply</button>
+		</div>
+	</div>
+
+	<div id="<%- threadId -%>-new-comment-form" style="display: none">
+		<textarea class="comment-textarea" id="new-comment-<%- threadId -%>" placeholder="Write a comment"></textarea>
+		<p class="tooltip" id="new-comment-<%- threadId -%>-tooltip" style="display: none"></p>
+		<button class="comment-submit" onclick="newResponse('<%- threadId -%>')">Comment</button><button class="comment-cancel" onclick="showCommentForm()">Cancel</button>
+	</div>
+</div>

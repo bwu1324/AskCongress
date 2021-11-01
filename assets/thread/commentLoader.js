@@ -33,12 +33,12 @@ function commentLoader(parentId, commentIds, depth) {
 						exclude.push(response.comments[i].commentId);
 						parent.innerHTML += response.comments[i].comment;
 						if (response.comments[i].commentIds.length > 0) {
-							setTimeout(() => { commentLoader(response.comments[i].commentId, response.comments[i].commentIds, depth + 1); }, 50);
+							setTimeout(() => { commentLoader(response.comments[i].commentId, response.comments[i].commentIds, depth + 1); }, 100);
 						}
 					}
 				}
 				if (response.loadMore) {
-					setTimeout(() => { commentLoader(parentId, commentIds); }, 50);
+					setTimeout(() => { commentLoader(parentId, commentIds); }, 100);
 				}
 			}
 		};

@@ -33,7 +33,8 @@ function start(dbClient, secret) {
 				// search for user in database
 				const user = await users.findOne({ _id: ObjectId(decrypted) }, {
 					projection: {
-						username: 1
+						username: 1,
+						member: 1
 					}
 				});
 

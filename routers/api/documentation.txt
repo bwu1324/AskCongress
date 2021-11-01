@@ -119,15 +119,64 @@ All POST:
 			comments: <array[				- array of objects representing comments sorted by number of likes
 				{
 					id: <string>					- comment id
-					comment: <string>				- text of comment
+					comment: <string>				- html of comment
 					commentIds: <array[<string>]	- array of ids of comment's comments
+				}
+			]
+			loadMore: <boolean>				(true) (false) - if there are more comments to load
+		}
+
+/getTagged
+	gets tagged information
+	request:
+		Cookie: auth: <string>				- session cookie
+		{
+			id: <string>					- id of user
+			exclude: <array[<string>]>		- array of thread ids to exclude from results
+		}
+	response:
+		{
+			success: <boolean>				(true) (false) - found tagged successfully or not
+			threads: <array[				- array of objects representing comments sorted by number of likes
+				{
+					id: <string>					- thread id
+					thread: <string>				- html of thread
+				}
+			]
+			loadMore: <boolean>				(true) (false) - if there are more threads to load
+		}
+
+/getTop
+	get top threads information
+	request:
+		{
+			exclude: <array[<string>]>		- array of thread ids to exclude from results
+		}
+	response:
+		{
+			success: <boolean>				(true) (false) - found top successfully or not
+			threads: <array[				- array of objects representing comments sorted by number of likes
+				{
+					id: <string>					- thread id
+					thread: <string>				- html of thread
 				}
 			]
 		}
 
-
-/getUser
-/getMember
-/getTop
-
 /search
+	search for threads
+	request:
+		{
+			search: <string>				- search string
+			exclude: <array[<string>]>		- array of thread ids to exclude from results
+		}
+	response:
+		{
+			success: <boolean>				(true) (false) - found top successfully or not
+			threads: <array[				- array of objects representing comments sorted by number of likes
+				{
+					id: <string>					- thread id
+					thread: <string>				- html of thread
+				}
+			]
+		}

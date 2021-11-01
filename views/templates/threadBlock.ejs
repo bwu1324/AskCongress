@@ -2,7 +2,7 @@
 	<% var date = new Date(created) %>
 	<div class="thread-block" id="<%- threadId -%>">
 		<div class="thread-info-container">
-			<a href="/profile/<%- user.id -%>" class="thread-creator-link"><p class="thread-creator">User: <%- user.username -%></p></a>
+			<p class="thread-creator">User: <%- user.username -%></p>
 			<p class="thread-created">Posted: <%- (date.getMonth()+1) + "/"+ date.getDate() + "/" + date.getFullYear() -%></p>
 		</div>
 		<hr>

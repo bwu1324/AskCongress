@@ -62,6 +62,9 @@ module.exports = async function (req, res, users, threads, comments) {
 					]
 				}
 			},
+			$pull: {
+				tagged: ObjectId(req.body.parent)
+			}
 		});
 
 		res.send({

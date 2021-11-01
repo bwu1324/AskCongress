@@ -20,15 +20,8 @@
 	font-size: 1em;
 	margin: 0px 50px 0px 0px;
 	color: black;
-}
-
-.comment-creator-link {
 	float: left;
 	text-decoration: none;
-}
-
-.comment-creator-link:hover {
-	text-decoration: underline;
 }
 
 .comment-created {
