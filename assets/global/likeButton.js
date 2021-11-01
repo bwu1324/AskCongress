@@ -9,7 +9,6 @@ function like(id) {
 		if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
 
 			const response = JSON.parse(this.response);
-
 			if (response.success) {
 				document.getElementById(`${id}-dislike-count`).innerHTML = parseInt(document.getElementById(`${id}-dislike-count`).innerHTML) + response.dislike;
 				document.getElementById(`${id}-dislike-icon`).className = 'dislike-icon';
@@ -23,7 +22,12 @@ function like(id) {
 
 				document.getElementById(`${id}-indicator`).style.width =  parseInt(100 * parseInt(document.getElementById(`${id}-like-count`).innerHTML) / (parseInt(document.getElementById(`${id}-like-count`).innerHTML) + parseInt(document.getElementById(`${id}-dislike-count`).innerHTML))) + '%';
 			}
-
+			else {
+				if (response.error === 'login') {
+					document.getElementById(`like-${id}-tooltip`).innerHTML = response.message;
+					document.getElementById(`like-${id}-tooltip`).style.display = 'block';
+				}
+			}
 		}
 	};
 

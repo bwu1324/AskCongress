@@ -11,6 +11,7 @@
 		<div class="like-dislike-ratio-indicator">
 			<div class="like-indicator" id="<%- commentId -%>-indicator" style="width: <%- parseInt(100 * likes / (likes + dislikes)) -%>%"></div>
 		</div>
+		<p class="tooltip" id="like-<%- commentId -%>-tooltip" style="display: none; margin: 10px 0px;"></p>
 		<button class="like" onclick="like('<%- commentId -%>')">
 			<p id="<%- commentId -%>-like-count" class="like-count"><%- likes -%></p>
 			<% if (liked) { %>

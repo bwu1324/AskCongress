@@ -22,6 +22,12 @@ function dislike(id) {
 
 				document.getElementById(`${id}-indicator`).style.width =  parseInt(100 * parseInt(document.getElementById(`${id}-like-count`).innerHTML) / (parseInt(document.getElementById(`${id}-like-count`).innerHTML) + parseInt(document.getElementById(`${id}-dislike-count`).innerHTML))) + '%';
 			}
+			else {
+				if (response.error === 'login') {
+					document.getElementById(`like-${id}-tooltip`).innerHTML = response.message;
+					document.getElementById(`like-${id}-tooltip`).style.display = 'block';
+				}
+			}
 		}
 	};
 
