@@ -1,6 +1,10 @@
 const express = require('express');
 const router = express.Router();
 
+router.get('/', (req, res) => {
+	res.redirect('/main');
+});
+
 router.get('/main', (req, res) => {
 	res.render('pages/main', { isSignedIn: req.isSignedIn, user: req.user });
 });
@@ -37,19 +41,19 @@ router.get('/newThread', (req, res) => {
 });
 
 router.get('/thread/:threadId', (req, res) => {
-	res.render('pages/thread', { 
-		isSignedIn: req.isSignedIn, 
-		user: req.user, 
+	res.render('pages/thread', {
+		isSignedIn: req.isSignedIn,
+		user: req.user,
 		threadId: req.params.threadId,
 		loadComment: 'all'
 	});
 });
 
 router.get('/thread/:threadId/:commentId', (req, res) => {
-	res.render('pages/thread', { 
-		isSignedIn: req.isSignedIn, 
-		user: req.user, 
-		threadId: req.params.threadId, 
+	res.render('pages/thread', {
+		isSignedIn: req.isSignedIn,
+		user: req.user,
+		threadId: req.params.threadId,
 		loadComment: req.params.commentId
 	});
 });

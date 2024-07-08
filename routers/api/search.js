@@ -8,27 +8,13 @@ module.exports = async function (req, res, users, threads) {
 			req.body.exclude[i] = ObjectId(req.body.exclude[i]);
 		}
 
-		const terms = req.body.search.replace(' ', '|');
 		const found = await threads.find({
 			_id: {
 				$not: {
 					$in: req.body.exclude
 				}
 			},
-			$or: [
-				{
-					title: {
-						$regex: terms,
-						$options: '$i'
-					}
-				},
-				{
-					body: {
-						$regex: terms,
-						$options: '$i'
-					}
-				}
-			]
+			$text: { $search: req.body.search }
 		}).limit(20).sort({
 			likes: -1
 		}).toArray();

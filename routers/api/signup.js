@@ -1,5 +1,4 @@
 const argon2 = require('argon2');
-const emailValidator = require('deep-email-validator');
 
 module.exports = async (req, res, users, createCookie) => {
 	try {
@@ -13,23 +12,7 @@ module.exports = async (req, res, users, createCookie) => {
 			});
 			return;
 		}
-		// email formatting
-		const validEmail = await emailValidator.validate({
-			email: req.body.email,
-			validateRegex: true,
-			validateMx: false,
-			validateTypo: false,
-			validateDisposable: true,
-			validateSMTP: false,
-		});
-		if (!validEmail.valid) {
-			res.send({
-				success: false,
-				error: 'email',
-				message: 'Enter a valid email'
-			});
-			return;
-		}
+
 		// if email exists already or not
 		const existingUsers = await users.find({ email: req.body.email }).toArray();
 		if (existingUsers.length !== 0) {
@@ -60,7 +43,7 @@ module.exports = async (req, res, users, createCookie) => {
 			commentIds: [],
 			member: false
 		});
-		
+
 		// create session cookie
 		res.cookie('auth', createCookie(inserted.insertedId.toString()));
 		res.send({

@@ -21,8 +21,7 @@
   "dependencies": {
     "argon2": "^0.28.2",
     "cookie-parser": "^1.4.5",
-    "crypto": "^1.0.1",
-    "deep-email-validator": "^0.1.18",
+    "dotenv": "^16.4.5",
     "ejs": "^3.1.6",
     "express": "^4.17.1",
     "mongodb": "^4.1.3",
